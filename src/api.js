@@ -1,16 +1,17 @@
 import axios from "axios";
-let apiUrl = "https://natha7-nc-news.onrender.com/api";
+const apiClient = axios.create({
+  baseURL: "https://natha7-nc-news.onrender.com/api",
+  timeout: 10000,
+});
 
 export function getArticles(currPage) {
-  return axios
-    .get(`${apiUrl}/articles?limit=10&p=${currPage}`)
-    .then(({ data }) => {
-      return data.articles;
-    });
+  return apiClient.get(`/articles?limit=10&p=${currPage}`).then(({ data }) => {
+    return data.articles;
+  });
 }
 
 export function getPageNumbers(limit = 10) {
-  return axios.get(`${apiUrl}/articles?limit=1000`).then(({ data }) => {
+  return apiClient.get(`/articles?limit=1000`).then(({ data }) => {
     let maxArticles = data.articles.length;
     const pageNumbers = [];
     for (let i = 0; maxArticles > 0; i++) {
@@ -18,5 +19,17 @@ export function getPageNumbers(limit = 10) {
       pageNumbers.push(i + 1);
     }
     return pageNumbers;
+  });
+}
+
+export function getArticleById(id) {
+  return apiClient.get(`/articles/${id}`).then(({ data }) => {
+    return data.article;
+  });
+}
+
+export function getCommentsByArticleId(id) {
+  return apiClient.get(`articles/${id}/comments`).then(({ data }) => {
+    return data.comments;
   });
 }
