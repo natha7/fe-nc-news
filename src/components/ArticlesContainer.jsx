@@ -59,14 +59,7 @@ export default function ArticlesContainer() {
           return (
             <ArticleCard
               key={article.author + article.article_id}
-              img_url={article.article_img_url}
-              article_id={article.article_id}
-              author={article.author}
-              comment_count={article.comment_count}
-              created_at={article.created_at}
-              title={article.title}
-              topic={article.topic}
-              votes={article.votes}
+              article={article}
             />
           );
         })
@@ -75,7 +68,7 @@ export default function ArticlesContainer() {
         ? null
         : pages.map((page) => {
             return (
-              <button onClick={choosePageNum} value={page}>
+              <button key={"page" + page} onClick={choosePageNum} value={page}>
                 {page}
               </button>
             );
