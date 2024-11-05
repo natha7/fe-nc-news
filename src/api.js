@@ -33,3 +33,7 @@ export function getCommentsByArticleId(id) {
     return data.comments;
   });
 }
+
+export function changeArticleVotesById(id, requestBody) {
+  return apiClient.patch(`articles/${id}`, requestBody);
+}
