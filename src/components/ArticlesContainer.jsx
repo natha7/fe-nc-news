@@ -51,6 +51,7 @@ export default function ArticlesContainer() {
 
   return (
     <>
+      <h1>Articles</h1>
       {error ? <p className="error-msg">{error}</p> : null}
       {isLoading ? (
         <p>Loading...</p>

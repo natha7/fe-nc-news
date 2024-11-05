@@ -37,3 +37,11 @@ export function getCommentsByArticleId(id) {
 export function changeArticleVotesById(id, requestBody) {
   return apiClient.patch(`articles/${id}`, requestBody);
 }
+
+export function postCommentByArticleId(id, requestBody) {
+  return apiClient.post(`articles/${id}/comments`, requestBody);
+}
+
+export function getUserByUsername(username) {
+  return apiClient.get(`users/${username}`);
+}

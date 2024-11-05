@@ -38,16 +38,16 @@ body {
 
 .vote-count {
   margin-left: 1rem;
+  margin-right: 2rem;
 }
 
 .article-card-topic {
   justify-self: right;
-  margin-right: 0.5rem;
+  margin-right: 2rem;
 }
 
 header {
-  min-height: 10%;
-  max-height: 10%;
+  max-height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: baseline;
@@ -74,4 +74,33 @@ header nav ul li {
 
 .comment-card {
   border: 1px grey solid;
+}
+
+.homepage {
+  background-image: url("./media/home-bg.jpg");
+  background-size: contain;
+  min-height: 90vh;
+  max-width: 100vw;
+  align-content: center;
+  justify-items: center;
+}
+
+.homepage h2 {
+  padding: 2rem;
+  background-color: white;
+}
+
+#root {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+textarea {
+  resize: none;
+  height: fit-content;
 }
