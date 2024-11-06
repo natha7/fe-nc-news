@@ -72,8 +72,17 @@ header nav ul li {
   max-height: 15rem;
 }
 
+.comment-body {
+  margin: 0;
+  word-wrap: break-word;
+}
 .comment-card {
   border: 1px grey solid;
+}
+
+.comment-card p,
+button {
+  margin-left: 0.5rem;
 }
 
 .homepage {

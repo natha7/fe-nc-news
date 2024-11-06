@@ -9,30 +9,116 @@ export default function SingleArticlePage() {
   const [articleVotes, setArticleVotes] = useState(0);
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [hasVoteFailedMsg, setHasVoteFailedMsg] = useState(false);
+  const [hasVoteFailed, setHasVoteFailed] = useState(false);
+  const [isLikeBtnPressed, setIsLikeBtnPressed] = useState(false);
+  const [isDislikeBtnPressed, setIsDislikeBtnPressed] = useState(false);
+
+  function sendUpdateRequest(requestBody) {
+    return changeArticleVotesById(article_id, requestBody);
+  }
+
+  function toggleTimedVoteFailError(
+    voteReversalNum,
+    toggleReversal,
+    typeOfBtn,
+    button
+  ) {
+    setHasVoteFailed(() => {
+      return true;
+    });
+    button.disabled = true;
+    setTimeout(() => {
+      setArticleVotes((curVotes) => {
+        return curVotes + voteReversalNum;
+      });
+      typeOfBtn === "like"
+        ? setIsLikeBtnPressed(() => {
+            return toggleReversal;
+          })
+        : setIsDislikeBtnPressed(() => {
+            return toggleReversal;
+          });
+      setHasVoteFailed(false);
+      button.disabled = false;
+    }, 2000);
+  }
 
   function changeLikes(event) {
-    const likeOrDislike = event.target.value;
+    const isLike = event.target.value === "like";
+    const button = event.target;
+    const incByOne = { inc_votes: 1 };
+    const decByOne = { inc_votes: -1 };
 
-    event.target.disabled = true;
-    setArticleVotes((curVotes) => {
-      return likeOrDislike === "like" ? curVotes + 1 : curVotes - 1;
-    });
-    changeArticleVotesById(
-      article_id,
-      likeOrDislike === "like" ? { inc_votes: 1 } : { inc_votes: -1 }
-    ).catch(() => {
-      setHasVoteFailedMsg(() => {
-        setArticleVotes((curVotes) => {
-          return likeOrDislike === "like" ? curVotes - 1 : curVotes + 1;
+    if (isLike) {
+      if (!isLikeBtnPressed && !isDislikeBtnPressed) {
+        setArticleVotes((currVotes) => {
+          return currVotes + 1;
         });
-        setTimeout(() => {
-          event.target.disabled = false;
-          setHasVoteFailedMsg(false);
-        }, 3000);
-        return true;
-      });
-    });
+        setIsLikeBtnPressed(() => {
+          return true;
+        });
+        sendUpdateRequest(incByOne).catch(() => {
+          toggleTimedVoteFailError(-1, false, "like", button);
+        });
+      }
+      if (isLikeBtnPressed && !isDislikeBtnPressed) {
+        setArticleVotes((currVotes) => {
+          return currVotes - 1;
+        });
+        setIsLikeBtnPressed(() => {
+          return false;
+        });
+        sendUpdateRequest(decByOne).catch(() => {
+          toggleTimedVoteFailError(1, true, "like", button);
+        });
+      }
+      if (!isLikeBtnPressed && isDislikeBtnPressed) {
+        setArticleVotes((currVotes) => {
+          return currVotes + 1;
+        });
+        setIsDislikeBtnPressed(() => {
+          return false;
+        });
+        sendUpdateRequest(incByOne).catch(() => {
+          toggleTimedVoteFailError(-1, true, "like", button);
+        });
+      }
+    }
+    if (!isLike) {
+      if (!isLikeBtnPressed && !isDislikeBtnPressed) {
+        setArticleVotes((currVotes) => {
+          return currVotes - 1;
+        });
+        setIsDislikeBtnPressed(() => {
+          return true;
+        });
+        sendUpdateRequest(decByOne).catch(() => {
+          toggleTimedVoteFailError(1, false, "dislike", button);
+        });
+      }
+      if (!isLikeBtnPressed && isDislikeBtnPressed) {
+        setArticleVotes((currVotes) => {
+          return currVotes + 1;
+        });
+        setIsDislikeBtnPressed(() => {
+          return false;
+        });
+        sendUpdateRequest(incByOne).catch(() => {
+          toggleTimedVoteFailError(-1, true, "dislike", button);
+        });
+      }
+      if (isLikeBtnPressed && !isDislikeBtnPressed) {
+        setArticleVotes((currVotes) => {
+          return currVotes - 1;
+        });
+        setIsLikeBtnPressed(() => {
+          return false;
+        });
+        sendUpdateRequest(decByOne).catch(() => {
+          toggleTimedVoteFailError(1, true, "dislike", button);
+        });
+      }
+    }
   }
 
   useEffect(() => {
@@ -68,7 +154,7 @@ export default function SingleArticlePage() {
           <p>{`Posted ${dateConverter(article.created_at)}`}</p>
           <p className="single-article-body">{article.body}</p>
           <p>Article votes: {articleVotes}</p>
-          {hasVoteFailedMsg ? (
+          {hasVoteFailed ? (
             <p>Something went wrong voting, please try again</p>
           ) : null}
           <button
@@ -76,14 +162,14 @@ export default function SingleArticlePage() {
             onClick={changeLikes}
             value="like"
           >
-            Like Article
+            {isLikeBtnPressed ? "Undo Like" : "Like"}
           </button>
           <button
             className="article-dislike-btn"
             onClick={changeLikes}
             value="dislike"
           >
-            Dislike Article
+            {isDislikeBtnPressed ? "Undo Dislike" : "Dislike"}
           </button>
           <CommentsList article_id={article_id} votes={article.votes} />
         </section>

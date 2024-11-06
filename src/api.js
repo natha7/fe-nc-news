@@ -45,3 +45,7 @@ export function postCommentByArticleId(id, requestBody) {
 export function getUserByUsername(username) {
   return apiClient.get(`users/${username}`);
 }
+
+export function deleteCommentByCommentId(id) {
+  return apiClient.delete(`comments/${id}`);
+}

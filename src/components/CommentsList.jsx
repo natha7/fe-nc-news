@@ -43,6 +43,7 @@ export default function CommentsList(props) {
             <CommentCard
               key={comment.author + comment.comment_id}
               comment={comment}
+              setComments={setComments}
             />
           );
         })
