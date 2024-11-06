@@ -57,13 +57,16 @@ export default function CommentPoster(props) {
   return (
     <form onSubmit={handleCommentSubmission}>
       <textarea
+        wrap="hard"
         name="commentArea"
         className="comment-textbox"
         value={currText}
         onChange={(event) => setCurrText(event.target.value)}
+        rows={10}
+        cols={30}
       ></textarea>
       <button id="comment-submit-btn" type="submit" disabled={isBtnDisabled}>
-        Post comment
+        {isBtnDisabled ? "Posting..." : "Post comment"}
       </button>
     </form>
   );
