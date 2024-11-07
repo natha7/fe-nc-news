@@ -4,8 +4,14 @@ const apiClient = axios.create({
   timeout: 10000,
 });
 
-export function getArticles(currPage, topicName) {
-  let requestUrl = `articles?p=${currPage}`;
+export function getArticles(currPage, topicName, searchParams) {
+  let sortBy = searchParams.get("sort");
+  let order = searchParams.get("order");
+
+  if (!sortBy) sortBy = "created_at";
+  if (!order) order = "desc";
+
+  let requestUrl = `articles?p=${currPage}&sort_by=${sortBy}&order=${order}`;
   if (topicName) {
     requestUrl += `&topic=${topicName}`;
   }

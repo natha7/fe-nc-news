@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getArticles, getPageNumbers } from "../api";
 import ArticleCard from "./ArticleCard";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import SortArticlesPageBar from "./SortArticlesPageBar";
 
 export default function ArticlesContainer(props) {
   const { isTopic } = props;
@@ -11,6 +12,7 @@ export default function ArticlesContainer(props) {
   const [pages, setPages] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const topicName = useParams().topic_name;
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function choosePageNum(event) {
     setPageNum(() => {
@@ -25,7 +27,7 @@ export default function ArticlesContainer(props) {
     setError(() => {
       return "";
     });
-    getArticles(pageNum, topicName)
+    getArticles(pageNum, topicName, searchParams)
       .then((articlesData) => {
         setArticles(() => {
           setIsLoading(() => {
@@ -50,14 +52,20 @@ export default function ArticlesContainer(props) {
         return pageBtnValues;
       });
     });
-  }, [pageNum, topicName]);
+  }, [pageNum, topicName, searchParams]);
 
   return (
     <>
       {isTopic ? (
-        <h1>{topicName[0].toUpperCase() + topicName.slice(1)}</h1>
+        <>
+          <h1>{topicName[0].toUpperCase() + topicName.slice(1)}</h1>
+          <SortArticlesPageBar setSearchParams={setSearchParams} />
+        </>
       ) : (
-        <h1>Articles</h1>
+        <>
+          <h1>Articles</h1>
+          <SortArticlesPageBar setSearchParams={setSearchParams} />
+        </>
       )}
       {error ? <p className="error-msg">{error}</p> : null}
       {isLoading ? (
