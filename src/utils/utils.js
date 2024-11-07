@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 export function dateConverter(postedDateString, typeOfConversion) {
   const postedDate = new Date(postedDateString);
   if (typeOfConversion === "shortenedDifference") {
@@ -54,4 +57,13 @@ export function dateConverter(postedDateString, typeOfConversion) {
   const minutes = postedDate.getMinutes().toString().padStart(2, "0");
   const amOrPm = hours >= 12 ? "pm" : "am";
   return `${day}/${month}/${year} ${hours}:${minutes}${amOrPm}`;
+}
+
+export function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const topOfPage = document.querySelector("#header-top");
+    return topOfPage.scrollIntoView({ behavior: "smooth" });
+  }, [pathname]);
 }

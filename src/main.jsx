@@ -6,11 +6,11 @@ import App from "./App";
 import { UserProvider } from "./contexts/User";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <StrictMode>
+  <StrictMode>
+    <BrowserRouter>
       <UserProvider>
         <App />
       </UserProvider>
-    </StrictMode>
-  </BrowserRouter>
+    </BrowserRouter>
+  </StrictMode>
 );

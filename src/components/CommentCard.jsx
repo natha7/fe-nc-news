@@ -1,12 +1,14 @@
 import { dateConverter } from "../utils/utils";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { deleteCommentByCommentId } from "../api";
+import VotingBtns from "./VotingBtns";
 
 export default function CommentCard(props) {
   const { comment, setComments } = props;
   const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [commentVotes, setCommentVotes] = useState(0);
 
   function handleDeleteComment(event) {
     event.target.disabled = true;
@@ -15,18 +17,22 @@ export default function CommentCard(props) {
     });
     deleteCommentByCommentId(comment.comment_id).then(() => {
       setComments((currentComments) => {
-        const indexToSplice = currentComments.findIndex((currComment) => {
-          return currComment.comment_id === comment.comment_id;
+        const deletedCommentRemoved = currentComments.filter((currComment) => {
+          return currComment.comment_id !== comment.comment_id;
         });
-        const splicedComments = currentComments.toSpliced(indexToSplice, 1);
-
-        return [...splicedComments];
+        return deletedCommentRemoved;
       });
       setIsLoading(() => {
         return false;
       });
     });
   }
+
+  useEffect(() => {
+    setCommentVotes(() => {
+      return comment.votes;
+    });
+  }, []);
 
   return (
     <article className="comment-card">
@@ -38,13 +44,20 @@ export default function CommentCard(props) {
           );
         })}
       </section>
-      <p>Comment votes: {comment.votes}</p>
+      <p>Comment votes: {commentVotes}</p>
       <p>Posted: {dateConverter(comment.created_at, "shortenedDifference")}</p>
       {user === comment.author ? (
         <button className="delete-comment-btn" onClick={handleDeleteComment}>
           {isLoading ? "Deleting..." : "Delete comment"}
         </button>
       ) : null}
+      {user === comment.author ? null : (
+        <VotingBtns
+          setVotes={setCommentVotes}
+          itemToVoteId={comment.comment_id}
+          typeOfItem="comment"
+        />
+      )}
     </article>
   );
 }

@@ -56,9 +56,11 @@ export default function CommentPoster(props) {
 
   return (
     <form onSubmit={handleCommentSubmission}>
+      <label htmlFor="comment-area">Comment</label>
       <textarea
         wrap="hard"
-        name="commentArea"
+        name="comment-area"
+        id="comment-area"
         className="comment-textbox"
         value={currText}
         onChange={(event) => setCurrText(event.target.value)}

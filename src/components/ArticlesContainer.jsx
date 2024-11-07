@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { getArticles, getPageNumbers } from "../api";
 import ArticleCard from "./ArticleCard";
+import { useParams } from "react-router-dom";
 
-export default function ArticlesContainer() {
+export default function ArticlesContainer(props) {
+  const { isTopic } = props;
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [pages, setPages] = useState([]);
   const [pageNum, setPageNum] = useState(1);
+  const topicName = useParams().topic_name;
 
   function choosePageNum(event) {
     setPageNum(() => {
@@ -22,7 +25,7 @@ export default function ArticlesContainer() {
     setError(() => {
       return "";
     });
-    getArticles(pageNum)
+    getArticles(pageNum, topicName)
       .then((articlesData) => {
         setArticles(() => {
           setIsLoading(() => {
@@ -42,19 +45,26 @@ export default function ArticlesContainer() {
           return err.message;
         });
       });
-    getPageNumbers().then((pageBtnValues) => {
+    getPageNumbers(undefined, topicName).then((pageBtnValues) => {
       setPages(() => {
         return pageBtnValues;
       });
     });
-  }, [pageNum]);
+  }, [pageNum, topicName]);
 
   return (
     <>
-      <h1>Articles</h1>
+      {isTopic ? (
+        <h1>{topicName[0].toUpperCase() + topicName.slice(1)}</h1>
+      ) : (
+        <h1>Articles</h1>
+      )}
       {error ? <p className="error-msg">{error}</p> : null}
       {isLoading ? (
-        <p>Loading...</p>
+        <div>
+          <div className="loader"></div>
+          <p>Loading...</p>
+        </div>
       ) : (
         articles.map((article) => {
           return (

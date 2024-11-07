@@ -4,14 +4,22 @@ const apiClient = axios.create({
   timeout: 10000,
 });
 
-export function getArticles(currPage) {
-  return apiClient.get(`/articles?limit=10&p=${currPage}`).then(({ data }) => {
+export function getArticles(currPage, topicName) {
+  let requestUrl = `articles?p=${currPage}`;
+  if (topicName) {
+    requestUrl += `&topic=${topicName}`;
+  }
+  return apiClient.get(requestUrl).then(({ data }) => {
     return data.articles;
   });
 }
 
-export function getPageNumbers(limit = 10) {
-  return apiClient.get(`/articles?limit=1000`).then(({ data }) => {
+export function getPageNumbers(limit = 10, topicName) {
+  let requestUrl = `/articles?limit=1000`;
+  if (topicName) {
+    requestUrl += `&topic=${topicName}`;
+  }
+  return apiClient.get(requestUrl).then(({ data }) => {
     let maxArticles = data.articles.length;
     const pageNumbers = [];
     for (let i = 0; maxArticles > 0; i++) {
@@ -34,8 +42,12 @@ export function getCommentsByArticleId(id) {
   });
 }
 
-export function changeArticleVotesById(id, requestBody) {
-  return apiClient.patch(`articles/${id}`, requestBody);
+export function changeItemVotesById(id, requestBody, typeOfItemToChange) {
+  if (typeOfItemToChange === "article") {
+    return apiClient.patch(`articles/${id}`, requestBody);
+  } else {
+    return apiClient.patch(`comments/${id}`, requestBody);
+  }
 }
 
 export function postCommentByArticleId(id, requestBody) {
@@ -48,4 +60,10 @@ export function getUserByUsername(username) {
 
 export function deleteCommentByCommentId(id) {
   return apiClient.delete(`comments/${id}`);
+}
+
+export function getTopics() {
+  return apiClient.get(`/topics`).then(({ data }) => {
+    return data.topics;
+  });
 }
