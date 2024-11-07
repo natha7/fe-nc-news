@@ -9,7 +9,7 @@ export default function ArticleCard(props) {
         <h3>{article.title}</h3>
         <p>by {article.author}</p>
         <p>Posted {dateConverter(article.created_at, "shortenedDifference")}</p>
-        <Link to={`/articles/${article.article_id}`}>
+        <Link to={`/article/${article.article_id}`}>
           <button>Read this article</button>
         </Link>
       </div>
