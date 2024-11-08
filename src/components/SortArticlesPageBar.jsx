@@ -9,21 +9,37 @@ export default function SortArticlesPageBar(props) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSortFormSubmit}>
-        <label htmlFor="sort_by">Sort by</label>
-        <select id="sort_by">
-          <option value="created_at">Date</option>
-          <option value="comment_count">Comments</option>
-          <option value="votes">Votes</option>
-        </select>
-        <label htmlFor="order">Order</label>
-        <select id="order">
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
-        </select>
-        <button type="submit">Sort</button>
-      </form>
-    </div>
+    <form onSubmit={handleSortFormSubmit}>
+      <div className="flex flex-row justify-between [&>*]:m-2 [&>*]: text-md p-1 m-1">
+        <div className="flex flex-col">
+          <label htmlFor="sort_by" className="mr-1 text-sm">
+            Sort by
+          </label>
+          <select
+            id="sort_by"
+            className="appearance-auto rounded-md bg-gray-100"
+          >
+            <option value="created_at">Date</option>
+            <option value="comment_count">Comments</option>
+            <option value="votes">Votes</option>
+          </select>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="order" className="mr-1 text-sm">
+            Order
+          </label>
+          <select id="order" className="appearance-auto rounded-md bg-gray-100">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          className="bg-orange-500 text-white rounded-md px-4 h-7 self-end"
+        >
+          Sort
+        </button>
+      </div>
+    </form>
   );
 }

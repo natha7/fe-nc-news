@@ -42,45 +42,40 @@ export default function ArticlesContainer(props) {
   }, [pageNum, topicName, searchParams]);
 
   return (
-    <>
+    <div className="min-h-screen">
       {error ? (
         <div className="error">
           <ErrorMsg errorToDisplay={error} />
         </div>
       ) : isLoading ? (
-        <div>
+        <div className="flex flex-col min-h-screen justify-center items-center">
           <div className="loader"></div>
           <p>Loading...</p>
         </div>
-      ) : isTopic ? (
-        <>
-          <h1>{topicName[0].toUpperCase() + topicName.slice(1)}</h1>
-          <SortArticlesPageBar setSearchParams={setSearchParams} />
-          {articles.map((article) => {
-            return (
-              <ArticleCard
-                key={article.author + article.article_id}
-                article={article}
-              />
-            );
-          })}
-          <PageNumbers setPageNum={setPageNum} topicName={topicName} />
-        </>
       ) : (
         <>
-          <h1>Articles</h1>
-          <SortArticlesPageBar setSearchParams={setSearchParams} />
-          {articles.map((article) => {
-            return (
-              <ArticleCard
-                key={article.author + article.article_id}
-                article={article}
-              />
-            );
-          })}
+          <div className="flex flex-col pt-5 mt-1 pb-5 mb-1 items-center border-orange-100 border-b-2">
+            <h1 className="text-4xl">
+              {isTopic
+                ? topicName[0].toUpperCase() + topicName.slice(1)
+                : "Articles"}
+            </h1>
+            <SortArticlesPageBar setSearchParams={setSearchParams} />
+          </div>
+          <PageNumbers setPageNum={setPageNum} topicName={topicName} />
+          <div className="divide-y divide-gray-200">
+            {articles.map((article) => {
+              return (
+                <ArticleCard
+                  key={article.author + article.article_id}
+                  article={article}
+                />
+              );
+            })}
+          </div>
           <PageNumbers setPageNum={setPageNum} topicName={topicName} />
         </>
       )}
-    </>
+    </div>
   );
 }
