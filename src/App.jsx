@@ -8,7 +8,7 @@ import ErrorMsg from "./components/ErrorMsg";
 
 export default function App() {
   return (
-    <>
+    <div className="bg-zinc-200 z-0">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,6 +21,6 @@ export default function App() {
         <Route path="*" element={<ErrorMsg isPageNotFound={true} />} />
       </Routes>
       <ScrollToTop />
-    </>
+    </div>
   );
 }

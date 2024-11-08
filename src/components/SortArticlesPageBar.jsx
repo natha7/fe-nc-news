@@ -35,7 +35,7 @@ export default function SortArticlesPageBar(props) {
         </div>
         <button
           type="submit"
-          className="bg-orange-500 text-white rounded-md px-4 h-7 self-end"
+          className="bg-emerald-800 text-white rounded-md px-4 h-7 self-end font-medium"
         >
           Sort
         </button>

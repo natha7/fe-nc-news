@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../api";
 import SingleArticle from "./SingleArticle";
 import ErrorMsg from "./ErrorMsg";
+import Loader from "./Loader";
 
 export default function SingleArticlePage() {
   const [error, setError] = useState("");
@@ -46,10 +47,7 @@ export default function SingleArticlePage() {
   return (
     <div>
       {isLoading ? (
-        <div>
-          <div className="loader"></div>
-          <p>Loading...</p>
-        </div>
+        <Loader />
       ) : error ? (
         <ErrorMsg errorToDisplay={error} />
       ) : (
