@@ -19,8 +19,8 @@ export default function Navbar() {
     });
   }
   return (
-    <nav>
-      <ul id="main-links">
+    <nav className="content-center">
+      <ul className="flex flex-row justify-between [&>*]:ml-1 [&>*]:p-1">
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -29,7 +29,7 @@ export default function Navbar() {
         </li>
         <li onClick={handleTopicsClick}>
           <div className="topics-list" onMouseLeave={handleTopicsMouseLeave}>
-            <p id="navbar-topics-dropdown">Topics</p>
+            Topics
             {isTopicsClicked ? <TopicBar /> : null}
           </div>
         </li>
@@ -37,9 +37,9 @@ export default function Navbar() {
           <Link to="/post">Post</Link>
         </li>
         {user ? (
-          <li id="signed-in-info">Signed in as {user}</li>
+          <li className="mr-1">{user}</li>
         ) : (
-          <li>
+          <li className="mr-1">
             <Link to="/sign-in">Sign in</Link>
           </li>
         )}

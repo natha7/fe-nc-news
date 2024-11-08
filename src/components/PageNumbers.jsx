@@ -20,10 +20,15 @@ export default function PageNumbers(props) {
   }, [topicName]);
 
   return (
-    <div>
+    <div className="flex flex-row justify-center">
       {pages.map((page) => {
         return (
-          <button key={"page" + page} onClick={choosePageNum} value={page}>
+          <button
+            className="px-2 mx-1 active:underline"
+            key={"page" + page}
+            onClick={choosePageNum}
+            value={page}
+          >
             {page}
           </button>
         );

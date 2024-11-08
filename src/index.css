@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 16px;
+  margin: 0;
+  font-family: "Hind Siliguri", Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.loader {
+  width: 120px;
+  height: 20px;
+  border-radius: 20px;
+  background: linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
+  animation: l2 2s infinite steps(10);
+}
+@keyframes l2 {
+  100% {
+    background-size: 110%;
+  }
+}
