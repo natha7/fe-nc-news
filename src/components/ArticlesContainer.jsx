@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import SortArticlesPageBar from "./SortArticlesPageBar";
 import PageNumbers from "./PageNumbers";
 import ErrorMsg from "./ErrorMsg";
+import Loader from "./Loader";
 
 export default function ArticlesContainer(props) {
   const { isTopic } = props;
@@ -42,20 +43,17 @@ export default function ArticlesContainer(props) {
   }, [pageNum, topicName, searchParams]);
 
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen mx-3 z-10 bg-white">
       {error ? (
         <div className="error">
           <ErrorMsg errorToDisplay={error} />
         </div>
       ) : isLoading ? (
-        <div className="flex flex-col min-h-screen justify-center items-center">
-          <div className="loader"></div>
-          <p>Loading...</p>
-        </div>
+        <Loader />
       ) : (
         <>
-          <div className="flex flex-col pt-5 mt-1 pb-5 mb-1 items-center border-orange-100 border-b-2">
-            <h1 className="text-4xl">
+          <div className="flex flex-col pt-5 pb-5 mb-1 items-center border-emerald-800 border-b-2 border-opacity-15">
+            <h1 className="text-4xl text-emerald-800 font-semibold">
               {isTopic
                 ? topicName[0].toUpperCase() + topicName.slice(1)
                 : "Articles"}
@@ -63,7 +61,7 @@ export default function ArticlesContainer(props) {
             <SortArticlesPageBar setSearchParams={setSearchParams} />
           </div>
           <PageNumbers setPageNum={setPageNum} topicName={topicName} />
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-gray-200 grid-flow-col">
             {articles.map((article) => {
               return (
                 <ArticleCard
@@ -76,6 +74,6 @@ export default function ArticlesContainer(props) {
           <PageNumbers setPageNum={setPageNum} topicName={topicName} />
         </>
       )}
-    </div>
+    </main>
   );
 }
