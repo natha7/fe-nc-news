@@ -14,7 +14,7 @@ export default function SortArticlesPageBar(props) {
         <label htmlFor="sort_by">Sort by</label>
         <select id="sort_by">
           <option value="created_at">Date</option>
-          <option value="comment_count">Comment count</option>
+          <option value="comment_count">Comments</option>
           <option value="votes">Votes</option>
         </select>
         <label htmlFor="order">Order</label>

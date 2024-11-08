@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import ArticlesContainer from "./components/ArticlesContainer";
 import SingleArticlePage from "./components/SingleArticlePage";
 import { ScrollToTop } from "./utils/utils";
+import ErrorMsg from "./components/ErrorMsg";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           path="/articles/:topic_name"
           element={<ArticlesContainer isTopic={true} />}
         />
+        <Route path="*" element={<ErrorMsg isPageNotFound={true} />} />
       </Routes>
       <ScrollToTop />
     </>

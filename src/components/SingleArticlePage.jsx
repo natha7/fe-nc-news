@@ -1,28 +1,40 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "../api";
-import { dateConverter } from "../utils/utils";
-import CommentsList from "./CommentsList";
-import VotingBtns from "./VotingBtns";
+import SingleArticle from "./SingleArticle";
+import ErrorMsg from "./ErrorMsg";
 
 export default function SingleArticlePage() {
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
   const [articleVotes, setArticleVotes] = useState(0);
   const [article, setArticle] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(() => {
       return true;
     });
-    getArticleById(article_id).then((fetchedArticle) => {
-      setArticle(() => {
+    setError(() => {
+      return "";
+    });
+    getArticleById(article_id)
+      .then((fetchedArticle) => {
+        setArticle(() => {
+          return fetchedArticle;
+        });
         setIsLoading(() => {
           return false;
         });
-        return fetchedArticle;
+      })
+      .catch((err) => {
+        setError(() => {
+          return err;
+        });
+        setIsLoading(() => {
+          return false;
+        });
       });
-    });
   }, []);
 
   useEffect(() => {
@@ -38,22 +50,14 @@ export default function SingleArticlePage() {
           <div className="loader"></div>
           <p>Loading...</p>
         </div>
+      ) : error ? (
+        <ErrorMsg errorToDisplay={error} />
       ) : (
-        <section>
-          <h1>{article.title}</h1>
-          <p>{article.topic}</p>
-          <img className="single-article-img" src={article.article_img_url} />
-          <p>by {article.author}</p>
-          <p>{`Posted ${dateConverter(article.created_at)}`}</p>
-          <p className="single-article-body">{article.body}</p>
-          <p>Article votes: {articleVotes}</p>
-          <VotingBtns
-            setVotes={setArticleVotes}
-            itemToVoteId={article.article_id}
-            typeOfItem="article"
-          />
-          <CommentsList article_id={article_id} votes={article.votes} />
-        </section>
+        <SingleArticle
+          article={article}
+          articleVotes={articleVotes}
+          setArticleVotes={setArticleVotes}
+        />
       )}
     </div>
   );
