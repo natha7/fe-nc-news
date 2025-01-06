@@ -51,7 +51,7 @@ export default function ArticlesContainer(props) {
       ) : isLoading ? (
         <Loader />
       ) : (
-        <>
+        <section className="animate-appear">
           <div className="flex flex-col pt-5 pb-5 mb-1 items-center border-emerald-800 border-b-2 border-opacity-15">
             <h1 className="text-4xl text-emerald-800 font-semibold">
               {isTopic
@@ -72,7 +72,7 @@ export default function ArticlesContainer(props) {
             })}
           </div>
           <PageNumbers setPageNum={setPageNum} topicName={topicName} />
-        </>
+        </section>
       )}
     </main>
   );

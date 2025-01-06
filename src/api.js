@@ -73,3 +73,11 @@ export function getTopics() {
     return data.topics;
   });
 }
+
+export function getTopArticles() {
+  return apiClient
+    .get("/articles?p=0&sort_by=votes&order=desc&limit=5")
+    .then(({ data }) => {
+      return data.articles;
+    });
+}

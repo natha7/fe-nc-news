@@ -63,7 +63,6 @@ export function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const topOfPage = document.querySelector("#header-top");
-    return topOfPage.scrollIntoView({ behavior: "smooth" });
+    scrollTo({ top: 0, left: 0 });
   }, [pathname]);
 }

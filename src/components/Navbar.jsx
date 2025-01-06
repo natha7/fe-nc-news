@@ -27,7 +27,7 @@ export default function Navbar() {
         return data.user.avatar_url;
       });
     });
-  }, []);
+  });
 
   return (
     <nav className="content-center">
@@ -45,13 +45,12 @@ export default function Navbar() {
           </div>
         </li>
         {user ? (
-          <li className="mr-1">
-            <div className="flex h-7">
+          <li className="mr-1 self-center">
+            <div className="flex aspect-square h-10 overflow-clip rounded-full border-slate-200 border-[0.5px]">
               <img
-                className="rounded-full h-4 w-4 self-center"
+                className="self-center justify-self-center"
                 src={avatarUrl}
               />
-              <p className="ml-1">{user}</p>
             </div>
           </li>
         ) : (
