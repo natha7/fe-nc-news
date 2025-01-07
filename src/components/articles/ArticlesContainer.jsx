@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getArticles } from "../api";
-import ArticleCard from "./ArticleCard";
+import { getArticles } from "../../api";
+import ArticleCard from "./ArticleCard.jsx";
 import { useParams, useSearchParams } from "react-router-dom";
 import SortArticlesPageBar from "./SortArticlesPageBar";
-import PageNumbers from "./PageNumbers";
-import ErrorMsg from "./ErrorMsg";
-import Loader from "./Loader";
+import PageNumbers from "../utils/PageNumbers";
+import ErrorMsg from "../errors/ErrorMsg";
+import Loader from "../loader/Loader";
 
 export default function ArticlesContainer(props) {
   const { isTopic } = props;
@@ -52,7 +52,7 @@ export default function ArticlesContainer(props) {
       ) : isLoading ? (
         <Loader />
       ) : (
-        <section className="animate-appear">
+        <section>
           <div className="flex flex-col pt-5 pb-5 mb-1 items-center border-emerald-800 border-b-2 border-opacity-15">
             <h1 className="text-4xl text-emerald-800 font-semibold">
               {isTopic
@@ -67,7 +67,7 @@ export default function ArticlesContainer(props) {
             pages={pages}
             setPages={setPages}
           />
-          <div className="divide-y divide-gray-200 grid-flow-col">
+          <div className="divide-y divide-gray-200 grid-flow-col animate-appear">
             {articles.map((article) => {
               return (
                 <ArticleCard

@@ -1,4 +1,4 @@
-import { dateConverter } from "../utils/utils";
+import { dateConverter } from "../../utils/utils";
 import { Link } from "react-router-dom";
 
 export default function ArticleCard(props) {

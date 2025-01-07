@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../contexts/User";
+import { UserContext } from "../../contexts/User";
 import TopicBar from "./TopicBar";
-import { getUserByUsername } from "../api";
+import { getUserByUsername } from "../../api";
 
 export default function Navbar() {
   const { user } = useContext(UserContext);
@@ -39,10 +39,7 @@ export default function Navbar() {
           <Link to="/articles">Articles</Link>
         </li>
         <li className="hover:cursor-pointer" onClick={handleTopicsClick}>
-          <div onMouseLeave={handleTopicsMouseLeave}>
-            Topics
-            {isTopicsClicked ? <TopicBar /> : null}
-          </div>
+          Topics
         </li>
         {user ? (
           <li className="mr-1 self-center">
@@ -59,6 +56,11 @@ export default function Navbar() {
           </li>
         )}
       </ul>
+      {isTopicsClicked ? (
+        <div onMouseLeave={handleTopicsMouseLeave} className="w-fit">
+          <TopicBar setIsTopicsClicked={setIsTopicsClicked} />
+        </div>
+      ) : null}
     </nav>
   );
 }

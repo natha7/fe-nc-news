@@ -1,8 +1,8 @@
-import { dateConverter } from "../utils/utils";
+import { dateConverter } from "../../utils/utils";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../contexts/User";
-import { deleteCommentByCommentId } from "../api";
-import VotingBtns from "./VotingBtns";
+import { UserContext } from "../../contexts/User";
+import { deleteCommentByCommentId } from "../../api";
+import VotingBtns from "../utils/VotingBtns";
 
 export default function CommentCard(props) {
   const { comment, setComments } = props;

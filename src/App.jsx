@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import ArticlesContainer from "./components/ArticlesContainer";
-import SingleArticlePage from "./components/SingleArticlePage";
+import Header from "./components/header/Header.jsx";
+import Home from "./components/home/Home.jsx";
+import ArticlesContainer from "./components/articles/ArticlesContainer.jsx";
+import SingleArticlePage from "./components/articles/SingleArticlePage.jsx";
 import { ScrollToTop } from "./utils/utils";
-import ErrorMsg from "./components/ErrorMsg";
+import ErrorMsg from "./components/errors/ErrorMsg.jsx";
 
 export default function App() {
   return (

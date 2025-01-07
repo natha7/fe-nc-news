@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../api";
+import { getArticleById } from "../../api";
 import SingleArticle from "./SingleArticle";
-import ErrorMsg from "./ErrorMsg";
-import Loader from "./Loader";
+import ErrorMsg from "../errors/ErrorMsg";
+import Loader from "../loader/Loader";
 
 export default function SingleArticlePage() {
   const [error, setError] = useState("");

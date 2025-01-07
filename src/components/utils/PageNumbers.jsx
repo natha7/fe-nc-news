@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getPageNumbers } from "../api";
+import { getPageNumbers } from "../../api";
 
 export default function PageNumbers(props) {
   const { setPageNum, topicName, pages, setPages } = props;

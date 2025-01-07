@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getTopArticles } from "../api";
-import ArticleCard from "./ArticleCard";
+import { getTopArticles } from "../../api";
+import ArticleCard from "../articles/ArticleCard.jsx";
 
 export default function TopArticles() {
   const [topArticles, setTopArticles] = useState([]);

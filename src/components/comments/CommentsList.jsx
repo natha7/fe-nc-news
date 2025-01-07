@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCommentsByArticleId } from "../api";
+import { getCommentsByArticleId } from "../../api";
 import CommentCard from "./CommentCard";
 import CommentPoster from "./CommentPoster";
 
@@ -22,7 +22,7 @@ export default function CommentsList(props) {
         return fetchedComments;
       });
     });
-  }, []);
+  }, [article_id]);
 
   return (
     <section className="comments-list">

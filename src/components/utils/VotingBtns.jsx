@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { changeItemVotesById } from "../api";
+import { changeItemVotesById } from "../../api";
 
 export default function VotingBtns(props) {
   const [hasVoteFailed, setHasVoteFailed] = useState(false);

@@ -1,6 +1,6 @@
-import { dateConverter } from "../utils/utils";
-import CommentsList from "./CommentsList";
-import VotingBtns from "./VotingBtns";
+import { dateConverter } from "../../utils/utils";
+import CommentsList from "../comments/CommentsList";
+import VotingBtns from "../utils/VotingBtns";
 
 export default function SingleArticle(props) {
   const { article, articleVotes, setArticleVotes } = props;
