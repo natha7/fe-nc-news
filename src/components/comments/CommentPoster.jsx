@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { postCommentByArticleId } from "../../api";
 import { UserContext } from "../../contexts/User";
+import ProfilePic from "../utils/ProfilePic";
 
-export default function CommentPoster(props) {
+export default function CommentPoster({
+  article_id,
+  setComments,
+  setHasCommentFailedToPost,
+  setIsCommentEmpty,
+}) {
   const { user } = useContext(UserContext);
   const [currText, setCurrText] = useState("");
   const [commentToPost, setCommentToPost] = useState("");
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
-  const {
-    article_id,
-    setComments,
-    setHasCommentFailedToPost,
-    setIsCommentEmpty,
-  } = props;
 
   function handleCommentSubmission(event) {
     event.preventDefault();
@@ -55,20 +55,33 @@ export default function CommentPoster(props) {
   }, [commentToPost]);
 
   return (
-    <form onSubmit={handleCommentSubmission}>
-      <label htmlFor="comment-area">Comment</label>
+    <form onSubmit={handleCommentSubmission} className="flex flex-col my-4">
+      <label htmlFor="comment-area" className="flex">
+        <ProfilePic size={"sm"} username={user} />
+        {user ? (
+          <p className="ml-2">{`Comment as ${user}`}</p>
+        ) : (
+          `Sign in to comment`
+        )}
+      </label>
+
       <textarea
         wrap="hard"
         name="comment-area"
         id="comment-area"
-        className="comment-textbox"
+        className="comment-textbox resize-none border-[1px] border-black/50 p-1 rounded-sm"
         value={currText}
         onChange={(event) => setCurrText(event.target.value)}
         rows={10}
         cols={30}
       ></textarea>
-      <button id="comment-submit-btn" type="submit" disabled={isBtnDisabled}>
-        {isBtnDisabled ? "Posting..." : "Post comment"}
+      <button
+        id="comment-submit-btn"
+        type="submit"
+        disabled={isBtnDisabled}
+        className="self-end bg-emerald-800 px-3 text-white mt-2 rounded-sm"
+      >
+        {isBtnDisabled ? "Posting..." : "Post"}
       </button>
     </form>
   );

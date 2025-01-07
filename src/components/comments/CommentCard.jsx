@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/User";
 import { deleteCommentByCommentId } from "../../api";
 import VotingBtns from "../utils/VotingBtns";
+import ProfilePic from "../utils/ProfilePic";
 
 export default function CommentCard(props) {
   const { comment, setComments } = props;
@@ -32,32 +33,58 @@ export default function CommentCard(props) {
     setCommentVotes(() => {
       return comment.votes;
     });
-  }, []);
+  }, [comment.votes]);
 
   return (
-    <article className="comment-card">
-      <p className="comment-author">{comment.author}</p>
-      <section className="comment-body">
-        {comment.body.split("\n").map((commentSegment, index) => {
-          return (
-            <p key={comment.comment_id + `segment${index}`}>{commentSegment}</p>
-          );
-        })}
-      </section>
-      <p>Comment votes: {commentVotes}</p>
-      <p>Posted: {dateConverter(comment.created_at, "shortenedDifference")}</p>
-      {user === comment.author ? (
-        <button className="delete-comment-btn" onClick={handleDeleteComment}>
-          {isLoading ? "Deleting..." : "Delete comment"}
-        </button>
-      ) : null}
-      {user === comment.author ? null : (
-        <VotingBtns
-          setVotes={setCommentVotes}
-          itemToVoteId={comment.comment_id}
-          typeOfItem="comment"
-        />
-      )}
+    <article className="comment-card border-[1px] p-2 my-1 shadow-sm">
+      <div className="flex flex-col">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <ProfilePic size="comment" username={comment.author} />
+            <p className="ml-2 comment-author font-semibold">
+              {comment.author}
+            </p>
+          </div>
+          <p className="text-gray-600">
+            Posted {dateConverter(comment.created_at, "shortenedDifference")}
+          </p>
+        </div>
+        <section className="comment-body">
+          {comment.body.split("\n").map((commentSegment, index) => {
+            return (
+              <p key={comment.comment_id + `segment${index}`}>
+                {commentSegment}
+              </p>
+            );
+          })}
+        </section>
+
+        <div className="self-end">
+          <p
+            className="text-right text-s text-gray-600
+          "
+          >
+            {commentVotes}{" "}
+            {commentVotes === 1 || commentVotes === -1 ? "vote" : "votes"}
+          </p>
+          {user === comment.author ? (
+            <button
+              className="bg-emerald-800 px-3 text-white mt-2 rounded-sm w-fit"
+              onClick={handleDeleteComment}
+            >
+              {isLoading ? "Deleting..." : "Delete comment"}
+            </button>
+          ) : null}
+          {user === comment.author ? null : (
+            <VotingBtns
+              setVotes={setCommentVotes}
+              itemToVoteId={comment.comment_id}
+              typeOfItem="comment"
+              size="20"
+            />
+          )}
+        </div>
+      </div>
     </article>
   );
 }

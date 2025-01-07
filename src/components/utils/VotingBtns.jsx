@@ -5,7 +5,7 @@ export default function VotingBtns(props) {
   const [hasVoteFailed, setHasVoteFailed] = useState(false);
   const [isLikeBtnPressed, setIsLikeBtnPressed] = useState(false);
   const [isDislikeBtnPressed, setIsDislikeBtnPressed] = useState(false);
-  const { setVotes, itemToVoteId, typeOfItem } = props;
+  const { setVotes, itemToVoteId, typeOfItem, size } = props;
 
   function sendUpdateRequest(requestBody) {
     return changeItemVotesById(itemToVoteId, requestBody, typeOfItem);
@@ -38,7 +38,6 @@ export default function VotingBtns(props) {
   }
 
   function changeLikes(event) {
-    console.dir(event.target);
     const isLike = event.target.value === "like";
     const button = event.target;
     const incByOne = { inc_votes: 1 };
@@ -120,7 +119,7 @@ export default function VotingBtns(props) {
       {hasVoteFailed ? <p>Something went wrong, please try again</p> : null}
 
       <button
-        className="mx-1 w-10 flex flex-col items-center"
+        className="mr-1 w-10 flex flex-col items-center"
         onClick={changeLikes}
         value="like"
       >
@@ -129,8 +128,8 @@ export default function VotingBtns(props) {
             className="pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            height="30"
-            width="30"
+            height={size}
+            width={size}
           >
             <path
               className="pointer-events-none"
@@ -143,8 +142,8 @@ export default function VotingBtns(props) {
             className="pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            height="30"
-            width="30"
+            height={size}
+            width={size}
           >
             <path
               className="pointer-events-none"
@@ -153,11 +152,11 @@ export default function VotingBtns(props) {
             />
           </svg>
         )}
-        <p className="pointer-events-none text-sm">Like</p>
+        <p className="pointer-events-none text-sm text-emerald-800">Like</p>
       </button>
 
       <button
-        className="mx-1 w-10 flex flex-col items-center"
+        className="ml-1 w-10 flex flex-col items-center"
         onClick={changeLikes}
         value="dislike"
       >
@@ -165,8 +164,8 @@ export default function VotingBtns(props) {
           <svg
             className="pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
-            height="30"
-            width="30"
+            height={size}
+            width={size}
             viewBox="0 0 512 512"
           >
             <path
@@ -180,8 +179,8 @@ export default function VotingBtns(props) {
             className="pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            height="30"
-            width="30"
+            height={size}
+            width={size}
           >
             <path
               className="pointer-events-none"
@@ -190,7 +189,7 @@ export default function VotingBtns(props) {
             />
           </svg>
         )}
-        <p className="pointer-events-none text-sm">Dislike</p>
+        <p className="pointer-events-none text-sm text-emerald-800">Dislike</p>
       </button>
     </div>
   );

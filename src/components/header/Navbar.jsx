@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/User";
 import TopicBar from "./TopicBar";
-import { getUserByUsername } from "../../api";
+import ProfilePic from "../utils/ProfilePic";
 
 export default function Navbar() {
   const { user } = useContext(UserContext);
   const [isTopicsClicked, setIsTopicsClicked] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("");
-
-  function handleTopicsClick() {
+  //adding on enter to topics bar
+  function handleTopicsClick(e) {
     setIsTopicsClicked((isTopicsClicked) => {
       return !isTopicsClicked;
     });
@@ -21,14 +20,6 @@ export default function Navbar() {
     });
   }
 
-  useEffect(() => {
-    getUserByUsername(user).then(({ data }) => {
-      setAvatarUrl(() => {
-        return data.user.avatar_url;
-      });
-    });
-  });
-
   return (
     <nav className="content-center">
       <ul className="flex flex-row justify-between [&>*]:ml-2 [&>*]:p-0.5 h-7">
@@ -38,17 +29,17 @@ export default function Navbar() {
         <li>
           <Link to="/articles">Articles</Link>
         </li>
-        <li className="hover:cursor-pointer" onClick={handleTopicsClick}>
+        <li
+          tabIndex={0}
+          className="hover:cursor-pointer"
+          onClick={handleTopicsClick}
+          onKeyDown={handleTopicsClick}
+        >
           Topics
         </li>
         {user ? (
           <li className="mr-1 self-center">
-            <div className="flex aspect-square h-10 overflow-clip rounded-full border-slate-200 border-[0.5px]">
-              <img
-                className="self-center justify-self-center"
-                src={avatarUrl}
-              />
-            </div>
+            <ProfilePic size={"md"} username={user} />
           </li>
         ) : (
           <li className="mr-1">
