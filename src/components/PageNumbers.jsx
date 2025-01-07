@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getPageNumbers } from "../api";
 
 export default function PageNumbers(props) {
-  const [pages, setPages] = useState([]);
-  const { setPageNum, topicName } = props;
+  const { setPageNum, topicName, pages, setPages } = props;
 
   function choosePageNum(event) {
     setPageNum(() => {

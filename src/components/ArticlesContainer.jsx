@@ -13,6 +13,7 @@ export default function ArticlesContainer(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [pageNum, setPageNum] = useState(1);
+  const [pages, setPages] = useState([]);
   const topicName = useParams().topic_name;
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -40,7 +41,7 @@ export default function ArticlesContainer(props) {
           return false;
         });
       });
-  }, [pageNum, topicName, searchParams]);
+  }, [topicName, pageNum, searchParams]);
 
   return (
     <main className="min-h-screen mx-3 z-10 bg-white">
@@ -60,7 +61,12 @@ export default function ArticlesContainer(props) {
             </h1>
             <SortArticlesPageBar setSearchParams={setSearchParams} />
           </div>
-          <PageNumbers setPageNum={setPageNum} topicName={topicName} />
+          <PageNumbers
+            setPageNum={setPageNum}
+            topicName={topicName}
+            pages={pages}
+            setPages={setPages}
+          />
           <div className="divide-y divide-gray-200 grid-flow-col">
             {articles.map((article) => {
               return (
@@ -71,7 +77,12 @@ export default function ArticlesContainer(props) {
               );
             })}
           </div>
-          <PageNumbers setPageNum={setPageNum} topicName={topicName} />
+          <PageNumbers
+            setPageNum={setPageNum}
+            topicName={topicName}
+            pages={pages}
+            setPages={setPages}
+          />
         </section>
       )}
     </main>

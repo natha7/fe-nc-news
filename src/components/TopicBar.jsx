@@ -17,9 +17,8 @@ export default function TopicBar() {
     <ul id="topic-list" className=" absolute bg-gray-100 rounded-md">
       {topics.map((topic, index) => {
         return (
-          <li key={topic.slug + index} className="">
+          <li key={topic.slug + index}>
             <Link
-              className=""
               to={`/articles/${topic.slug}`}
               state={{ topicName: topic.slug, topicDesc: topic.description }}
             >
