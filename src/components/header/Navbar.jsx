@@ -7,8 +7,8 @@ import ProfilePic from "../utils/ProfilePic";
 export default function Navbar() {
   const { user } = useContext(UserContext);
   const [isTopicsClicked, setIsTopicsClicked] = useState(false);
-  //adding on enter to topics bar
-  function handleTopicsClick(e) {
+
+  function handleTopicsClick() {
     setIsTopicsClicked((isTopicsClicked) => {
       return !isTopicsClicked;
     });

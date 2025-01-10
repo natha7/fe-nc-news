@@ -18,6 +18,12 @@ export default function ArticlesContainer(props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    setPageNum(() => {
+      return 1;
+    });
+  }, [topicName]);
+
+  useEffect(() => {
     setIsLoading(() => {
       return true;
     });
@@ -41,7 +47,7 @@ export default function ArticlesContainer(props) {
           return false;
         });
       });
-  }, [topicName, pageNum, searchParams]);
+  }, [pageNum, searchParams]);
 
   return (
     <main className="min-h-screen mx-3 z-10 bg-white">
