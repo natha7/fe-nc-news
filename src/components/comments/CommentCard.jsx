@@ -36,7 +36,7 @@ export default function CommentCard(props) {
   }, [comment.votes]);
 
   return (
-    <article className="comment-card border-[1px] p-2 my-1 shadow-sm">
+    <article className="border-[1px] p-2 my-1 shadow-sm">
       <div className="flex flex-col">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -49,10 +49,13 @@ export default function CommentCard(props) {
             Posted {dateConverter(comment.created_at, "shortenedDifference")}
           </p>
         </div>
-        <section className="comment-body">
+        <section>
           {comment.body.split("\n").map((commentSegment, index) => {
             return (
-              <p key={comment.comment_id + `segment${index}`}>
+              <p
+                className="break-words"
+                key={comment.comment_id + `segment${index}`}
+              >
                 {commentSegment}
               </p>
             );

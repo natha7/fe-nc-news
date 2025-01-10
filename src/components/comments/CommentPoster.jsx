@@ -55,7 +55,10 @@ export default function CommentPoster({
   }, [commentToPost]);
 
   return (
-    <form onSubmit={handleCommentSubmission} className="flex flex-col my-4">
+    <form
+      onSubmit={handleCommentSubmission}
+      className="flex flex-col my-4 md:max-w-[50%]"
+    >
       <label htmlFor="comment-area" className="flex">
         <ProfilePic size={"sm"} username={user} />
         {user ? (
@@ -69,17 +72,17 @@ export default function CommentPoster({
         wrap="hard"
         name="comment-area"
         id="comment-area"
-        className="comment-textbox resize-none border-[1px] border-black/50 p-1 rounded-sm"
+        className="resize-none border-[1px] border-black/50 p-1 rounded-sm"
         value={currText}
         onChange={(event) => setCurrText(event.target.value)}
-        rows={10}
-        cols={30}
+        rows={5}
+        cols={20}
       ></textarea>
       <button
         id="comment-submit-btn"
         type="submit"
         disabled={isBtnDisabled}
-        className="self-end bg-emerald-800 px-3 text-white mt-2 rounded-sm"
+        className="self-end bg-emerald-800 px-3 text-white font-semibold mt-2 rounded-sm shadow-sm"
       >
         {isBtnDisabled ? "Posting..." : "Post"}
       </button>
