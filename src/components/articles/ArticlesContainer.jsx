@@ -7,21 +7,24 @@ import PageNumbers from "../utils/PageNumbers";
 import ErrorMsg from "../errors/ErrorMsg";
 import Loader from "../loader/Loader";
 
-export default function ArticlesContainer(props) {
-  const { isTopic } = props;
+export default function ArticlesContainer() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [pageNum, setPageNum] = useState(1);
   const [pages, setPages] = useState([]);
-  const topicName = useParams().topic_name;
+  const newTopic = useParams().topic_name;
+  const [topicName, setTopicName] = useState(newTopic);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
+  if (topicName !== useParams().topic_name) {
+    setTopicName(() => {
+      return newTopic;
+    });
     setPageNum(() => {
       return 1;
     });
-  }, [topicName]);
+  }
 
   useEffect(() => {
     setIsLoading(() => {
@@ -30,6 +33,7 @@ export default function ArticlesContainer(props) {
     setError(() => {
       return "";
     });
+
     getArticles(pageNum, topicName, searchParams)
       .then((articlesData) => {
         setArticles(() => {
@@ -47,21 +51,19 @@ export default function ArticlesContainer(props) {
           return false;
         });
       });
-  }, [pageNum, searchParams]);
+  }, [topicName, pageNum, searchParams]);
 
   return (
-    <main className="min-h-screen mx-3 z-10 bg-white">
+    <main className="min-h-screen mx-3 z-10 bg-white flex justify-center">
       {error ? (
-        <div className="error">
-          <ErrorMsg errorToDisplay={error} />
-        </div>
+        <ErrorMsg errorToDisplay={error} />
       ) : isLoading ? (
         <Loader />
       ) : (
         <section>
           <div className="flex flex-col pt-5 pb-5 mb-1 items-center border-emerald-800 border-b-2 border-opacity-15">
             <h1 className="text-4xl text-emerald-800 font-semibold">
-              {isTopic
+              {topicName
                 ? topicName[0].toUpperCase() + topicName.slice(1)
                 : "Articles"}
             </h1>

@@ -37,7 +37,10 @@ export default function ArticleCard(props) {
         </article>
       </Link>
     ) : (
-      <article id={article.article_id} className={`m-2 p-2`}>
+      <article
+        id={article.article_id}
+        className={`m-2 p-2 md:min-w-[750px] sm:min-w-[335px]`}
+      >
         <div className="article-card-info">
           <div className="flex flex-col">
             <p className="bg-emerald-200 max-w-fit text-sm text-black px-2 rounded-sm font-medium">

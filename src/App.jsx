@@ -14,10 +14,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<ArticlesContainer />} />
         <Route path="/article/:article_id" element={<SingleArticlePage />} />
-        <Route
-          path="/articles/:topic_name"
-          element={<ArticlesContainer isTopic={true} />}
-        />
+        <Route path="/articles/:topic_name" element={<ArticlesContainer />} />
         <Route path="*" element={<ErrorMsg isPageNotFound={true} />} />
       </Routes>
       <ScrollToTop />

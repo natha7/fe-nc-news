@@ -7,7 +7,7 @@ export default function ErrorMsg(props) {
       errorToDisplay.code === "ECONNABORTED"
     ) {
       return (
-        <>
+        <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="36"
@@ -27,13 +27,13 @@ export default function ErrorMsg(props) {
           <p>
             The service is currently not responsive. Please try again later.
           </p>
-        </>
+        </div>
       );
     }
   }
 
   return (
-    <div className="error">
+    <div className="flex flex-col m-auto w-fit items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="36"
@@ -56,7 +56,9 @@ export default function ErrorMsg(props) {
           <h3>{errorToDisplay.response.data.msg}</h3>
         </>
       )}
-      <p>Please check the URL or use the navigation bar to relocate articles</p>
+      <p>
+        Please check the URL or use the navigation bar to relocate to articles
+      </p>
     </div>
   );
 }
