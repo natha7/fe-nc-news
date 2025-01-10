@@ -1,7 +1,7 @@
 import axios from "axios";
 const apiClient = axios.create({
   baseURL: "https://natha7-nc-news.onrender.com/api",
-  timeout: 10000,
+  timeout: 3000,
 });
 
 export function getArticles(currPage, topicName, searchParams) {
