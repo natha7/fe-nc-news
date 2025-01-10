@@ -76,7 +76,7 @@ export function getTopics() {
 
 export function getTopArticles() {
   return apiClient
-    .get("/articles?p=0&sort_by=votes&order=desc&limit=5")
+    .get("/articles?p=0&sort_by=votes&order=desc&limit=7")
     .then(({ data }) => {
       return data.articles;
     });

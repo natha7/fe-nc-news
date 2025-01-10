@@ -30,7 +30,7 @@ export default function TopArticles() {
 
   {
     return isLoading ? null : isMsgVisible ? (
-      <div className="flex flex-col items-center justify-self-center m-2">
+      <div className="flex flex-col items-center justify-self-center m-2 ">
         <h2 className="text-3xl">Note:</h2>
         <p className="text-xl">
           As the backend is hosted on a Render free plan, please allow some time
@@ -42,21 +42,57 @@ export default function TopArticles() {
         </p>
       </div>
     ) : (
-      <>
-        <h2 className=" text-2xl ml-1 font-semibold">Top Articles</h2>
-        <section className="grid grid-cols-4 grid-rows-auto gap-1 w-fit max-w-[100vw] h-auto animate-appear m-1">
-          {topArticles.map((article, index) => {
-            return (
-              <ArticleCard
-                key={article.article_id}
-                article={article}
-                style="home"
-                index={index}
-              />
-            );
-          })}
-        </section>
-      </>
+      <section className="flex min-w-full">
+        <div className="flex flex-col lg:max-w-[60%] md:max-w-[90%] m-auto">
+          <h2 className=" text-2xl ml-1 font-semibold">Top Articles</h2>
+          <section className="min-h-screen animate-appear m-1">
+            {
+              <div className="w-full h-max">
+                <div className="flex w-full">
+                  <div className="w-3/4">
+                    <ArticleCard
+                      key={topArticles[0].article_id}
+                      article={topArticles[0]}
+                      style="home"
+                      index={0}
+                    />
+                  </div>
+                  <div className="flex flex-col w-1/4 h-full">
+                    {[topArticles[1], topArticles[2]].map((article, index) => {
+                      return (
+                        <div key={article.article_id} className="w-full">
+                          <ArticleCard
+                            article={article}
+                            style="home"
+                            index={index + 1}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="flex w-full h-fit mt-5">
+                  {[
+                    topArticles[3],
+                    topArticles[4],
+                    topArticles[5],
+                    topArticles[6],
+                  ].map((article, index) => {
+                    return (
+                      <ArticleCard
+                        key={article.article_id}
+                        article={article}
+                        style="home"
+                        index={index + 1}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            }
+          </section>
+        </div>
+      </section>
     );
   }
 }

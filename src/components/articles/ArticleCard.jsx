@@ -7,19 +7,17 @@ export default function ArticleCard(props) {
     return style === "home" ? (
       <Link
         to={`/article/${article.article_id}`}
-        className={`${
-          !index ? "col-start-1 col-end-5" : "col-auto row-auto h-fit"
-        } group  bg-white`}
+        className={`${!index ? "" : ""} group bg-white`}
       >
         <article
           id={article.article_id}
-          className="w-full h-full p-1 overflow-hidden"
+          className={`${!index ? "" : ""} p-1 m-auto`}
         >
           <p className="bg-emerald-800/20 max-w-fit text-[11px] text-black px-2 rounded-sm shadow-sm font-medium">
             {article.topic}
           </p>
           <img
-            className="aspect-auto mx-auto my-1 rounded-sm"
+            className="aspect-auto mx-auto my-1 rounded-sm w-full"
             src={article.article_img_url}
           />
 
@@ -41,18 +39,15 @@ export default function ArticleCard(props) {
         id={article.article_id}
         className={`m-2 p-2 md:min-w-[750px] sm:min-w-[335px]`}
       >
-        <div className="article-card-info">
-          <div className="flex flex-col">
-            <p className="bg-emerald-200 max-w-fit text-sm text-black px-2 rounded-sm font-medium">
-              {article.topic}
-            </p>
-            <p className="font-semibold text-xl">{article.title}</p>
-          </div>
-          <p>by {article.author}</p>
-          <p>
-            Posted {dateConverter(article.created_at, "shortenedDifference")}
+        <div className="flex flex-col">
+          <p className="bg-emerald-200 max-w-fit text-sm text-black px-2 rounded-sm font-medium">
+            {article.topic}
           </p>
+          <p className="font-semibold text-xl">{article.title}</p>
         </div>
+        <p>by {article.author}</p>
+        <p>Posted {dateConverter(article.created_at, "shortenedDifference")}</p>
+
         <div className="article-card-img-votes">
           <img
             className="w-80 h-auto mx-auto my-3 rounded-sm"
