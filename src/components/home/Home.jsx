@@ -9,7 +9,6 @@ export default function Home() {
             Home
           </h2>
         </div>
-        <h2 className=" text-2xl ml-1 font-semibold">Top Articles</h2>
         <TopArticles />
       </div>
     </section>
