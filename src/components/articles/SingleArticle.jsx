@@ -15,7 +15,10 @@ export default function SingleArticle(props) {
           </p>
           <p>by {article.author}</p>
           <div className=" m-auto">
-            <img className="m-auto w-full" src={article.article_img_url} />
+            <img
+              className="m-auto w-full rounded-md"
+              src={article.article_img_url}
+            />
             <div className="flex justify-between items-center mt-1">
               <p>{`Posted ${dateConverter(article.created_at)}`}</p>
 

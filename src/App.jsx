@@ -5,10 +5,12 @@ import ArticlesContainer from "./components/articles/ArticlesContainer.jsx";
 import SingleArticlePage from "./components/articles/SingleArticlePage.jsx";
 import { ScrollToTop } from "./utils/utils";
 import ErrorMsg from "./components/errors/ErrorMsg.jsx";
+import Footer from "./footer/Footer.jsx";
 
 export default function App() {
   return (
-    <div className="bg-zinc-200 z-0">
+    <>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -17,7 +19,7 @@ export default function App() {
         <Route path="/articles/:topic_name" element={<ArticlesContainer />} />
         <Route path="*" element={<ErrorMsg isPageNotFound={true} />} />
       </Routes>
-      <ScrollToTop />
-    </div>
+      <Footer />
+    </>
   );
 }

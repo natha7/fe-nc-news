@@ -13,6 +13,7 @@ export default function CommentPoster({
   const [currText, setCurrText] = useState("");
   const [commentToPost, setCommentToPost] = useState("");
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [charCount, setCharCount] = useState(0);
 
   function handleCommentSubmission(event) {
     event.preventDefault();
@@ -21,6 +22,18 @@ export default function CommentPoster({
     } else setIsCommentEmpty(false);
     setCommentToPost(() => {
       return currText;
+    });
+  }
+
+  function handleTextAreaChange(event) {
+    event.preventDefault();
+
+    setCurrText(() => {
+      return event.target.value;
+    });
+
+    setCharCount(() => {
+      return currText.length;
     });
   }
 
@@ -67,6 +80,7 @@ export default function CommentPoster({
           `Sign in to comment`
         )}
       </label>
+      <p>{charCount}</p>
 
       <textarea
         wrap="hard"
@@ -74,7 +88,7 @@ export default function CommentPoster({
         id="comment-area"
         className="resize-none border-[1px] border-black/50 p-1 rounded-sm"
         value={currText}
-        onChange={(event) => setCurrText(event.target.value)}
+        onChange={handleTextAreaChange}
         rows={5}
         cols={20}
       ></textarea>
