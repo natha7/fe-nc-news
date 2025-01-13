@@ -24,14 +24,17 @@ export default function Navbar() {
     <nav className="content-center">
       <ul className="flex flex-row justify-between [&>*]:ml-2 [&>*]:p-0.5 h-7">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className="hover:text-emerald-800">
+            Home
+          </Link>
         </li>
         <li>
-          <Link to="/articles">Articles</Link>
+          <Link to="/articles" className="hover:text-emerald-800">
+            Articles
+          </Link>
         </li>
         <li
-          tabIndex={0}
-          className="hover:cursor-pointer"
+          className="hover:cursor-pointer hover:text-emerald-800"
           onClick={handleTopicsClick}
           onKeyDown={handleTopicsClick}
         >
