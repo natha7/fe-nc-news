@@ -13,7 +13,6 @@ export default function CommentPoster({
   const [currText, setCurrText] = useState("");
   const [commentToPost, setCommentToPost] = useState("");
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
-  const [charCount, setCharCount] = useState(0);
 
   function handleCommentSubmission(event) {
     event.preventDefault();

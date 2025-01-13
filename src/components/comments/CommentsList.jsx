@@ -25,7 +25,7 @@ export default function CommentsList(props) {
   }, [article_id]);
 
   return (
-    <section className="comments-list border-t-[1px] border-slate-200 m-2">
+    <section className="border-t-[1px] border-slate-200 m-2">
       <h2 className="text-2xl">Comments</h2>
       {hasCommentFailedToPost ? <p>Failed to post, please try again.</p> : null}
       {isCommentEmpty ? <p>Comments cannot be empty</p> : null}

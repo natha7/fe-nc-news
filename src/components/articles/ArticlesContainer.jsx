@@ -62,13 +62,13 @@ export default function ArticlesContainer() {
   }, [topicName, pageNum, searchParams]);
 
   return (
-    <main className="min-h-screen mx-3 z-10 bg-white flex justify-center">
+    <section className="min-h-screen mx-3 z-10 flex justify-center mb-7">
       {error ? (
         <ErrorMsg errorToDisplay={error} />
-      ) : isLoading && pages.length === 0 ? (
+      ) : isLoading && pages.length ? (
         <Loader />
       ) : (
-        <section>
+        <div>
           <div className="flex flex-col pt-5 pb-5 mb-1 items-center border-emerald-800 border-b-2 border-opacity-15">
             <h1 className="text-4xl text-emerald-800 font-semibold">
               {topicName
@@ -89,8 +89,8 @@ export default function ArticlesContainer() {
             })}
           </div>
           {pageNumbers}
-        </section>
+        </div>
       )}
-    </main>
+    </section>
   );
 }
