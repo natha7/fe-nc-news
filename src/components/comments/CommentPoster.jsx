@@ -31,10 +31,6 @@ export default function CommentPoster({
     setCurrText(() => {
       return event.target.value;
     });
-
-    setCharCount(() => {
-      return currText.length;
-    });
   }
 
   useEffect(() => {
@@ -80,7 +76,7 @@ export default function CommentPoster({
           `Sign in to comment`
         )}
       </label>
-      <p>{charCount}</p>
+      <p className="text-right text-sm text-gray-500">{currText.length}/250</p>
 
       <textarea
         wrap="hard"
@@ -91,6 +87,7 @@ export default function CommentPoster({
         onChange={handleTextAreaChange}
         rows={5}
         cols={20}
+        maxLength={250}
       ></textarea>
       <button
         id="comment-submit-btn"

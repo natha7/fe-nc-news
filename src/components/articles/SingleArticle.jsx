@@ -36,7 +36,7 @@ export default function SingleArticle(props) {
             </div>
           </div>
 
-          <p>{article.body}</p>
+          <p className="mt-5">{article.body}</p>
         </div>
       </div>
       <CommentsList article_id={article.article_id} votes={article.votes} />
