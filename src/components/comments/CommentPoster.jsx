@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { postCommentByArticleId } from "../../api";
-import { UserContext } from "../../contexts/User";
+import { UserContext } from "../../contexts/UserProvider";
 import ProfilePic from "../utils/ProfilePic";
 
 export default function CommentPoster({

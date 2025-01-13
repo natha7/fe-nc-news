@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { UserContext } from "../../contexts/User";
+import { UserContext } from "../../contexts/UserProvider";
 import TopicBar from "./TopicBar";
 import ProfilePic from "../utils/ProfilePic";
 

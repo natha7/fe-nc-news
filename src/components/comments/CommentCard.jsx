@@ -1,6 +1,6 @@
 import { dateConverter } from "../../utils/utils";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts/User";
+import { UserContext } from "../../contexts/UserProvider";
 import { deleteCommentByCommentId } from "../../api";
 import VotingBtns from "../utils/VotingBtns";
 import ProfilePic from "../utils/ProfilePic";
