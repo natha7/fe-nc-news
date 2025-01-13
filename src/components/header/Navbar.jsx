@@ -8,9 +8,11 @@ export default function Navbar() {
   const { user } = useContext(UserContext);
   const [isTopicsClicked, setIsTopicsClicked] = useState(false);
 
-  function handleTopicsClick() {
-    setIsTopicsClicked((isTopicsClicked) => {
-      return !isTopicsClicked;
+  function handleTopicsClick(e) {
+    if (e.type === "keydown" && e.key.toLowerCase() !== "enter") return;
+
+    setIsTopicsClicked(() => {
+      return true;
     });
   }
 
@@ -33,12 +35,10 @@ export default function Navbar() {
             Articles
           </Link>
         </li>
-        <li
-          className="hover:cursor-pointer hover:text-emerald-800"
-          onClick={handleTopicsClick}
-          onKeyDown={handleTopicsClick}
-        >
-          Topics
+        <li className="hover:cursor-pointer hover:text-emerald-800">
+          <button onClick={handleTopicsClick} onKeyDown={handleTopicsClick}>
+            Topics
+          </button>
         </li>
         {user ? (
           <li className="mr-1 self-center">
