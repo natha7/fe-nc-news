@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTopArticles } from "../../api";
-import ArticleCard from "../articles/ArticleCard.jsx";
+import TopArticleCard from "../articles/TopArticleCard.jsx";
 
 export default function TopArticles() {
   const [topArticles, setTopArticles] = useState([]);
@@ -50,10 +50,9 @@ export default function TopArticles() {
               <div className="w-full h-max">
                 <div className="flex w-full">
                   <div className="w-3/4">
-                    <ArticleCard
+                    <TopArticleCard
                       key={topArticles[0].article_id}
                       article={topArticles[0]}
-                      style="home"
                       index={0}
                     />
                   </div>
@@ -61,7 +60,7 @@ export default function TopArticles() {
                     {[topArticles[1], topArticles[2]].map((article, index) => {
                       return (
                         <div key={article.article_id} className="w-full">
-                          <ArticleCard
+                          <TopArticleCard
                             article={article}
                             style="home"
                             index={index + 1}
@@ -79,7 +78,7 @@ export default function TopArticles() {
                     topArticles[6],
                   ].map((article, index) => {
                     return (
-                      <ArticleCard
+                      <TopArticleCard
                         key={article.article_id}
                         article={article}
                         style="home"
