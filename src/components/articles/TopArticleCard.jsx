@@ -2,14 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function TopArticleCard({ article, index }) {
   return (
-    <Link
-      to={`/article/${article.article_id}`}
-      className={`${!index ? "" : ""} group bg-white`}
-    >
-      <article
-        id={article.article_id}
-        className={`${!index ? "" : ""} p-1 m-auto`}
-      >
+    <Link to={`/article/${article.article_id}`} className={`group bg-white`}>
+      <article id={article.article_id} className={`p-1 m-auto`}>
         <p className="bg-emerald-800/20 max-w-fit text-[11px] text-black px-2 rounded-sm shadow-sm font-medium">
           {article.topic}
         </p>
