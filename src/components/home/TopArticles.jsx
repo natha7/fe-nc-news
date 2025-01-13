@@ -45,7 +45,7 @@ export default function TopArticles() {
       <section className="flex min-w-full">
         <div className="flex flex-col lg:max-w-[60%] md:max-w-[90%] m-auto">
           <h2 className=" text-2xl ml-1 font-semibold">Top Articles</h2>
-          <section className="min-h-screen animate-appear m-1">
+          <section className="min-h-screen m-1">
             {
               <div className="w-full h-max">
                 <div className="flex w-full">

@@ -75,7 +75,7 @@ export default function ArticlesContainer() {
             pages={pages}
             setPages={setPages}
           />
-          <div className="divide-y divide-gray-200 grid-flow-col animate-appear">
+          <div className="divide-y divide-gray-200">
             {articles.map((article) => {
               return (
                 <ArticleCard
