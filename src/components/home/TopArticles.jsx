@@ -60,11 +60,7 @@ export default function TopArticles() {
                     {[topArticles[1], topArticles[2]].map((article, index) => {
                       return (
                         <div key={article.article_id} className="w-full">
-                          <TopArticleCard
-                            article={article}
-                            style="home"
-                            index={index + 1}
-                          />
+                          <TopArticleCard article={article} index={index + 1} />
                         </div>
                       );
                     })}
@@ -81,7 +77,6 @@ export default function TopArticles() {
                       <TopArticleCard
                         key={article.article_id}
                         article={article}
-                        style="home"
                         index={index + 1}
                       />
                     );
