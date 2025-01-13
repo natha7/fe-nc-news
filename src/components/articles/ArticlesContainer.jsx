@@ -57,7 +57,7 @@ export default function ArticlesContainer() {
     <main className="min-h-screen mx-3 z-10 bg-white flex justify-center">
       {error ? (
         <ErrorMsg errorToDisplay={error} />
-      ) : isLoading ? (
+      ) : isLoading && !pages ? (
         <Loader />
       ) : (
         <section>
