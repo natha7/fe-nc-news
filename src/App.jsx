@@ -6,19 +6,22 @@ import SingleArticlePage from "./components/articles/SingleArticlePage.jsx";
 import { ScrollToTop } from "./utils/utils";
 import ErrorMsg from "./components/errors/ErrorMsg.jsx";
 import Footer from "./footer/Footer.jsx";
+import MainWrapper from "./components/utils/MainWrapper.jsx";
 
 export default function App() {
   return (
     <>
       <ScrollToTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/articles" element={<ArticlesContainer />} />
-        <Route path="/article/:article_id" element={<SingleArticlePage />} />
-        <Route path="/articles/:topic_name" element={<ArticlesContainer />} />
-        <Route path="*" element={<ErrorMsg isPageNotFound={true} />} />
-      </Routes>
+      <MainWrapper>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/articles" element={<ArticlesContainer />} />
+          <Route path="/article/:article_id" element={<SingleArticlePage />} />
+          <Route path="/articles/:topic_name" element={<ArticlesContainer />} />
+          <Route path="*" element={<ErrorMsg isPageNotFound={true} />} />
+        </Routes>
+      </MainWrapper>
       <Footer />
     </>
   );

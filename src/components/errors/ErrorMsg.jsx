@@ -7,7 +7,7 @@ export default function ErrorMsg(props) {
       errorToDisplay.code === "ECONNABORTED"
     ) {
       return (
-        <main className="flex flex-col m-auto w-fit items-center justify-center min-h-[calc(100vh-56px-41px)]">
+        <div className="flex flex-col m-auto w-fit items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="36"
@@ -27,13 +27,13 @@ export default function ErrorMsg(props) {
           <p>
             The service is currently not responsive. Please try again later.
           </p>
-        </main>
+        </div>
       );
     }
   }
 
   return (
-    <main className="flex flex-col m-auto w-fit items-center justify-center min-h-[calc(100vh-56px-41px)]">
+    <div className="flex flex-col h-screen items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="36"
@@ -59,6 +59,6 @@ export default function ErrorMsg(props) {
       <p>
         Please check the URL or use the navigation bar to relocate to articles
       </p>
-    </main>
+    </div>
   );
 }
