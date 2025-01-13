@@ -23,7 +23,7 @@ export default function PageNumbers(props) {
       {pages.map((page) => {
         return (
           <button
-            className="px-2 mx-1 active:underline"
+            className="px-2 mx-1 active:underline hover:text-emerald-800"
             key={"page" + page}
             onClick={choosePageNum}
             value={page}
