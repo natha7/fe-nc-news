@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const apiClient = axios.create({
   baseURL: "https://natha7-nc-news.onrender.com/api",
   timeout: 3000,
@@ -11,7 +12,7 @@ export function getArticles(currPage, topicName, searchParams) {
   if (!sortBy) sortBy = "created_at";
   if (!order) order = "desc";
 
-  let requestUrl = `articles?p=${currPage}&sort_by=${sortBy}&order=${order}`;
+  let requestUrl = `articles?p=${currPage}&sort_by=${sortBy}&order=${order}&limit=5`;
   if (topicName) {
     requestUrl += `&topic=${topicName}`;
   }
@@ -20,7 +21,7 @@ export function getArticles(currPage, topicName, searchParams) {
   });
 }
 
-export function getPageNumbers(limit = 10, topicName) {
+export function getPageNumbers(limit = 5, topicName) {
   let requestUrl = `/articles?limit=1000`;
   if (topicName) {
     requestUrl += `&topic=${topicName}`;
