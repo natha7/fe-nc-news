@@ -1,11 +1,11 @@
-export default function SortArticlesPageBar(props) {
-  const { setSearchParams } = props;
-
+export default function SortArticlesPageBar({ setFilters }) {
   function handleSortFormSubmit(event) {
     event.preventDefault();
     const sortBy = document.getElementById("sort_by").value;
     const order = document.getElementById("order").value;
-    setSearchParams(`sort=${sortBy}&order=${order}`);
+    setFilters(() => {
+      return [sortBy, order];
+    });
   }
 
   return (

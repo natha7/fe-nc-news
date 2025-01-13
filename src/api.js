@@ -5,14 +5,15 @@ const apiClient = axios.create({
   timeout: 3000,
 });
 
-export function getArticles(currPage, topicName, searchParams) {
-  let sortBy = searchParams.get("sort");
-  let order = searchParams.get("order");
+export function getArticles(
+  currPage,
+  topicName,
+  filters = ["created_at", "desc"],
+  limit = 5
+) {
+  const [sortBy, order] = filters;
 
-  if (!sortBy) sortBy = "created_at";
-  if (!order) order = "desc";
-
-  let requestUrl = `articles?p=${currPage}&sort_by=${sortBy}&order=${order}&limit=5`;
+  let requestUrl = `articles?p=${currPage}&sort_by=${sortBy}&order=${order}&limit=${limit}`;
   if (topicName) {
     requestUrl += `&topic=${topicName}`;
   }
@@ -75,9 +76,13 @@ export function getTopics() {
   });
 }
 
-export function getTopArticles() {
+export function getTopArticles(limit, topic) {
   return apiClient
-    .get("/articles?p=0&sort_by=votes&order=desc&limit=7")
+    .get(
+      `/articles?p=0&sort_by=votes&order=desc&limit=${limit}${
+        topic ? `&topic=${topic}` : null
+      }`
+    )
     .then(({ data }) => {
       return data.articles;
     });

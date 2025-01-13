@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../../api";
 import ArticleCard from "./ArticleCard.jsx";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SortArticlesPageBar from "./SortArticlesPageBar";
 import PageNumbers from "../utils/PageNumbers";
 import ErrorMsg from "../errors/ErrorMsg";
@@ -15,7 +15,8 @@ export default function ArticlesContainer() {
   const [pages, setPages] = useState([]);
   const newTopic = useParams().topic_name;
   const [topicName, setTopicName] = useState(newTopic);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [filters, setFilters] = useState(["created_at", "desc"]);
+
   const pageNumbers = (
     <PageNumbers
       setPageNum={setPageNum}
@@ -42,7 +43,7 @@ export default function ArticlesContainer() {
       return "";
     });
 
-    getArticles(pageNum, topicName, searchParams)
+    getArticles(pageNum, topicName, filters)
       .then((articlesData) => {
         setArticles(() => {
           setIsLoading(() => {
@@ -59,7 +60,7 @@ export default function ArticlesContainer() {
           return false;
         });
       });
-  }, [topicName, pageNum, searchParams]);
+  }, [topicName, pageNum, filters]);
 
   return (
     <section className="min-h-screen mx-3 z-10 flex justify-center mb-7">
@@ -75,7 +76,7 @@ export default function ArticlesContainer() {
                 ? topicName[0].toUpperCase() + topicName.slice(1)
                 : "Articles"}
             </h1>
-            <SortArticlesPageBar setSearchParams={setSearchParams} />
+            <SortArticlesPageBar setFilters={setFilters} />
           </div>
           {pageNumbers}
           <div className="divide-y divide-gray-200">

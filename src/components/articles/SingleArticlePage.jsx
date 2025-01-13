@@ -36,7 +36,7 @@ export default function SingleArticlePage() {
           return false;
         });
       });
-  }, []);
+  }, [article_id]);
 
   useEffect(() => {
     setArticleVotes(() => {
