@@ -16,6 +16,14 @@ export default function ArticlesContainer() {
   const newTopic = useParams().topic_name;
   const [topicName, setTopicName] = useState(newTopic);
   const [searchParams, setSearchParams] = useSearchParams();
+  const pageNumbers = (
+    <PageNumbers
+      setPageNum={setPageNum}
+      topicName={topicName}
+      pages={pages}
+      setPages={setPages}
+    />
+  );
 
   if (topicName !== useParams().topic_name) {
     setTopicName(() => {
@@ -57,7 +65,7 @@ export default function ArticlesContainer() {
     <main className="min-h-screen mx-3 z-10 bg-white flex justify-center">
       {error ? (
         <ErrorMsg errorToDisplay={error} />
-      ) : isLoading && !pages ? (
+      ) : isLoading && pages.length === 0 ? (
         <Loader />
       ) : (
         <section>
@@ -69,12 +77,7 @@ export default function ArticlesContainer() {
             </h1>
             <SortArticlesPageBar setSearchParams={setSearchParams} />
           </div>
-          <PageNumbers
-            setPageNum={setPageNum}
-            topicName={topicName}
-            pages={pages}
-            setPages={setPages}
-          />
+          {pageNumbers}
           <div className="divide-y divide-gray-200">
             {articles.map((article) => {
               return (
@@ -85,12 +88,7 @@ export default function ArticlesContainer() {
               );
             })}
           </div>
-          <PageNumbers
-            setPageNum={setPageNum}
-            topicName={topicName}
-            pages={pages}
-            setPages={setPages}
-          />
+          {pageNumbers}
         </section>
       )}
     </main>
