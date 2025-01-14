@@ -28,7 +28,7 @@ export default function SingleArticle({
                   className="m-auto w-full rounded-md"
                   src={article.article_img_url}
                 />
-                {articlesToDisplay}
+                {/* {articlesToDisplay} */}
               </div>
               <div className="flex justify-between items-center mt-1">
                 <p>{`Posted ${dateConverter(article.created_at)}`}</p>
