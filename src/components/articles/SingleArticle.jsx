@@ -1,17 +1,12 @@
 import { dateConverter } from "../../utils/utils";
 import CommentsList from "../comments/CommentsList";
 import VotingBtns from "../utils/VotingBtns";
-import MoreArticles from "./MoreArticles";
 
 export default function SingleArticle({
   article,
   articleVotes,
   setArticleVotes,
 }) {
-  const articlesToDisplay = (
-    <MoreArticles topic={article.topic} currArticleId={article.article_id} />
-  );
-
   return (
     <section className="min-h-screen z-10 bg-white pt-3 mt-10">
       <div className="flex md:mx-[15%] lg:mx-[15%]">
@@ -28,7 +23,6 @@ export default function SingleArticle({
                   className="m-auto w-full rounded-md"
                   src={article.article_img_url}
                 />
-                {/* {articlesToDisplay} */}
               </div>
               <div className="flex justify-between items-center mt-1">
                 <p>{`Posted ${dateConverter(article.created_at)}`}</p>

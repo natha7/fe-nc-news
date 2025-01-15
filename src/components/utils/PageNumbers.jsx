@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { getPageNumbers } from "../../api";
+import { ScrollToTop } from "../../utils/utils";
 
 export default function PageNumbers(props) {
   const { setPageNum, topicName, pages, setPages } = props;
@@ -8,6 +9,7 @@ export default function PageNumbers(props) {
     setPageNum(() => {
       return event.target.value;
     });
+    scrollTo({ left: 0, top: 0 });
   }
 
   useEffect(() => {
